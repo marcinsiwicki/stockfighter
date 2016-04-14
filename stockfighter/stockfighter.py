@@ -13,8 +13,8 @@ class Stockfighter(object):
     Class for interfacing with the Stockfighter.io API.
     """
 
-    def __init__(self, account=None):
-        self.api_key = 'cddfe033ad966aa680079e22f80b6bbf52a4e96c'
+    def __init__(self, account=None, api_key):
+        self.api_key = api_key
         self.base_url = 'https://api.stockfighter.io/ob/api'
         self.account = None
 
@@ -87,20 +87,3 @@ class Stockfighter(object):
             return response.json()
         else:
             raise KeyError(response.json()['error'])
-
-
-if __name__ == '__main__':
-    sf = Stockfighter('BDS84539797')
-    venue = 'PUXBEX'
-    symbol = 'WSL'
-    quote = sf.quote(venue, symbol)
-    order = sf.order(venue, symbol, 'buy', 100, 'limit', 1.00)
-
-    pprint.pprint(quote)
-    print "\n"
-
-    pprint.pprint(order)
-    print "\n"
-
-    status = sf.order_status(venue, symbol, order['id'])
-    pprint.pprint(status)

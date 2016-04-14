@@ -40,7 +40,8 @@ class Stockfighter(object):
 
         self._urljoin = partial(urljoin, self.base_url)
         self.session = requests.Session()
-        self.session.headers = {'X-Starfighter-Authorization': self.api_key}
+        headers = {'X-Starfighter-Authorization': self.api_key}
+        self.session.headers.update(headers)
 
     def heartbeat(self):
         """

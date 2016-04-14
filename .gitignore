@@ -1,2 +1,4 @@
 private_keys.py
 *.pyc
+level*.py
+test.py

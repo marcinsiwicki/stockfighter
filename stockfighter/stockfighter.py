@@ -61,8 +61,8 @@ class Stockfighter(object):
 
         :rtype: bool
         """
-        url = self._urljoin('venues/{0}/heatbeat'.format(venue))
-        response = self.session.get(url)
+        url = 'venues/{0}/heatbeat'.format(venue)
+        response = self.session.get(self._urljoin(url))
         if response.ok:
             return True
         else:
@@ -76,8 +76,8 @@ class Stockfighter(object):
         :param: venue, str
         :rtype: list of strings
         """
-        url = self._urljoin('venues/{0}/stocks'.format(venue))
-        response = self.session.get(url)
+        url = 'venues/{0}/stocks'.format(venue)
+        response = self.session.get(self._urljoin(url))
         if response.ok:
             return [elem['symbol'] for elem in response.json()['symbols']]
         else:
@@ -87,8 +87,8 @@ class Stockfighter(object):
         """
         Returns the order book available for a venue and symbol.
         """
-        url = self._urljoin('venues/{0}/stocks/{1}'.format(venue, symbol))
-        response = self.session.get(url)
+        url = 'venues/{0}/stocks/{1}'.format(venue, symbol)
+        response = self.session.get(self._urljoin(url))
         if response.ok:
             return response.json()
         else:
@@ -103,9 +103,8 @@ class Stockfighter(object):
         :rtype JSON object representing quote
             https://starfighter.readme.io/docs/a-quote-for-a-stock
         """
-        url = self._urljoin('venues/{0}/stocks/{1}/quote'.format(venue,
-                                                                 symbol))
-        response = self.session.get(url)
+        url = 'venues/{0}/stocks/{1}/quote'.format(venue, symbol)
+        response = self.session.get(self._urljoin(url))
         if response.ok:
             return response.json()
         else:
@@ -138,22 +137,19 @@ class Stockfighter(object):
         if ordertype != OrderType.market:
             order["price"] = int(price * 100)
 
-        url = self._urljoin('venues/{0}/stocks/{1}/orders'.format(venue,
-                                                                  symbol))
-        response = self.session.post(url, json=order)
+        url = 'venues/{0}/stocks/{1}/orders'.format(venue, symbol)
+        response = self.session.post(self._urljoin(url), json=order)
         return response.json()
 
-    def order_status(self, venue, symbol, id):
+    def order_status(self, venue, symbol, orderid):
         """
         Check on order status.
 
         :param id: int
         :rtype JSON order object
         """
-        url = self._urljoin('venues/{0}/stocks/{1}/orders/{2}'.format(venue,
-                                                                      symbol,
-                                                                      str(id)))
-        response = self.session.get(url)
+        url = 'venues/{0}/stocks/{1}/orders/{2}'.format(venue, symbol, orderid)
+        response = self.session.get(self._urljoin(url))
         if response.ok:
             return response.json()
         else:

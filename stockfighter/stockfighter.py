@@ -28,6 +28,9 @@ class OrderType(Enum):
 class Stockfighter(object):
     """
     Class for interfacing with the Stockfighter.io API.
+
+    :param api_key: string containing private key
+    :param account: optional account string
     """
 
     def __init__(self, api_key, account=None):
@@ -56,13 +59,13 @@ class Stockfighter(object):
         else:
             raise SystemError('Stockfighter.io API is down!')
 
-    def venue_heartbet(self, venue):
+    def venue_heartbeat(self, venue):
         """
         Pings a venue to verify it is up.
 
         :rtype: bool
         """
-        url = 'venues/{0}/heatbeat'.format(venue)
+        url = 'venues/{0}/heartbeat'.format(venue)
         response = self.session.get(self._urljoin(url))
         if response.ok:
             return True
@@ -124,6 +127,9 @@ class Stockfighter(object):
         :rtype JSON order object
             https://starfighter.readme.io/docs/place-new-order
         """
+        if side not in ('buy', 'sell'):
+            raise KeyError('Wrong order type passed, not buy or sell')
+
         order = {'venue': venue,
                  'stock': symbol,
                  'qty': quantity,
@@ -136,22 +142,34 @@ class Stockfighter(object):
 
         # will throw KeyError if no price provided for non market
         if ordertype != OrderType.market:
-            order["price"] = int(price * 100)
+            order["price"] = price
 
         url = 'venues/{0}/stocks/{1}/orders'.format(venue, symbol)
         response = self.session.post(self._urljoin(url), json=order)
         return response.json()
 
-    def order_status(self, venue, symbol, orderid):
+    def order_status(self, venue, symbol, orderId):
         """
         Check on order status.
 
         :param id: int
         :rtype JSON order object
         """
-        url = 'venues/{0}/stocks/{1}/orders/{2}'.format(venue, symbol, orderid)
+        url = 'venues/{0}/stocks/{1}/orders/{2}'.format(venue, symbol, orderId)
         response = self.session.get(self._urljoin(url))
         if response.ok:
             return response.json()
         else:
             raise KeyError(response.json()['error'])
+
+    def cancel_order(self, venue, symbol, orderId):
+        """
+        Cancels a given order.
+        """
+        url = 'venues/{0}/stocks/{1}/orders/{2}/cancel'.format(venue, symbol, orderId)
+        response = self.session.post(self._urljoin(url))
+        if response.ok:
+            return response.json()
+        else:
+            raise KeyError(response.json()['error'])
+

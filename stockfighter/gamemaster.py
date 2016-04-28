@@ -62,6 +62,17 @@ class Gamemaster(object):
         else:
             raise KeyError('Level resume failed: {0}'.format(instance_id))
 
+    def status(self, instance_id):
+        """
+        Get status of level.
+        """
+        url = 'instances/{0}'.format(instance_id)
+        response = self.session.get(self._urljoin(url))
+        if response.ok:
+            return response.json()
+        else:
+            raise KeyError('Level key error: {0}'.format(instance_id))
+
     def levels(self):
         """
         Retrieve list of available levels.

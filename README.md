@@ -1,3 +1,0 @@
-# Stockfighter.io Python Client
-
-

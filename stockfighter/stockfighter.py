@@ -9,6 +9,10 @@ from urlparse import urljoin
 
 
 class OrderType(Enum):
+    """
+    Enum for expressing OrderType. Will convert to str when printing
+    or communicating with Stockfighter.
+    """
     market = 1
     limit = 2
     fok = 3
@@ -77,8 +81,8 @@ class Stockfighter(object):
         Retrieve the list of stocks available for trading on a venue. Note this
         method only returns the tickers.
 
-        :param: venue, str
-        :rtype: list of strings
+        :param venue: str
+        :rtype: list(str)
         """
         url = 'venues/{0}/stocks'.format(venue)
         response = self.session.get(self._urljoin(url))
@@ -90,6 +94,10 @@ class Stockfighter(object):
     def orderbook(self, venue, symbol):
         """
         Returns the order book available for a venue and symbol.
+
+        :param venue: str
+        :param symbol: str
+        :rtype: JSON https://starfighter.readme.io/docs/get-orderbook-for-stock
         """
         url = 'venues/{0}/stocks/{1}'.format(venue, symbol)
         response = self.session.get(self._urljoin(url))
@@ -104,8 +112,7 @@ class Stockfighter(object):
 
         :param venue: str
         :param symbol: str
-        :rtype JSON object representing quote
-            https://starfighter.readme.io/docs/a-quote-for-a-stock
+        :rtype: JSON https://starfighter.readme.io/docs/a-quote-for-a-stock
         """
         url = 'venues/{0}/stocks/{1}/quote'.format(venue, symbol)
         response = self.session.get(self._urljoin(url))
@@ -123,9 +130,8 @@ class Stockfighter(object):
         :param side: str
         :param price: float
         :param quantity: int
-        :param order_type: str
-        :rtype JSON order object
-            https://starfighter.readme.io/docs/place-new-order
+        :param ordertype: str
+        :rtype: JSON https://starfighter.readme.io/docs/place-new-order
         """
         if side not in ('buy', 'sell'):
             raise KeyError('Wrong order type passed, not buy or sell')
@@ -148,28 +154,34 @@ class Stockfighter(object):
         response = self.session.post(self._urljoin(url), json=order)
         return response.json()
 
-    def order_status(self, venue, symbol, orderId):
+    def order_status(self, venue, symbol, order_id):
         """
         Check on order status.
 
-        :param id: int
-        :rtype JSON order object
+        :param venue: str
+        :param symbol: str
+        :param order_id: int
+        :rtype: JSON https://starfighter.readme.io/docs/status-for-an-existing-order
         """
-        url = 'venues/{0}/stocks/{1}/orders/{2}'.format(venue, symbol, orderId)
+        url = 'venues/{0}/stocks/{1}/orders/{2}'.format(venue, symbol, order_id)
         response = self.session.get(self._urljoin(url))
         if response.ok:
             return response.json()
         else:
             raise KeyError(response.json()['error'])
 
-    def cancel_order(self, venue, symbol, orderId):
+    def cancel_order(self, venue, symbol, order_id):
         """
         Cancels a given order.
+
+        :param venue: str
+        :param symbol: str
+        :param order_id: int
+        :rtype: JSON https://starfighter.readme.io/docs/cancel-an-order
         """
-        url = 'venues/{0}/stocks/{1}/orders/{2}/cancel'.format(venue, symbol, orderId)
+        url = 'venues/{0}/stocks/{1}/orders/{2}/cancel'.format(venue, symbol, order_id)
         response = self.session.post(self._urljoin(url))
         if response.ok:
             return response.json()
         else:
             raise KeyError(response.json()['error'])
-

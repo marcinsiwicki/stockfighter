@@ -1,0 +1,407 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Stockfighter &mdash; Stockfighter Client 0.10 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Stockfighter Client 0.10 documentation" href="index.html"/>
+        <link rel="next" title="OrderType Enum" href="ordertype.html"/>
+        <link rel="prev" title="Stockfighter.io" href="intro.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Stockfighter Client
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Overview</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Stockfighter.io</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html#project-info">Project Info</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Stockfighter</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Stockfighter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#suggestions">Suggestions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#docs">Docs</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Specifying Order Types</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ordertype.html">OrderType Enum</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Interacting with Gamemaster</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gamemaster.html">Gamemaster</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Stockfighter Client</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Stockfighter</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/stockfighter.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="stockfighter">
+<h1>Stockfighter<a class="headerlink" href="#stockfighter" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="suggestions">
+<h2>Suggestions<a class="headerlink" href="#suggestions" title="Permalink to this headline">¶</a></h2>
+<p>Documentation of JSON responses can be found in the linked Stockfighter docs.</p>
+<p>If participating in a level with a single venue and symbol, it may be beneficial
+to use <code class="docutils literal"><span class="pre">functools</span></code> to simplify the order placement, status checking, and other functions.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">sf</span> <span class="o">=</span> <span class="n">Stockfighter</span><span class="p">(</span><span class="n">API_KEY</span><span class="p">,</span> <span class="s1">&#39;TEST_ACCT&#39;</span><span class="p">)</span>
+<span class="n">order</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">sf</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="s1">&#39;VENUE&#39;</span><span class="p">,</span> <span class="s1">&#39;SYMBOL&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="docs">
+<h2>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="stockfighter.Stockfighter">
+<em class="property">class </em><code class="descclassname">stockfighter.</code><code class="descname">Stockfighter</code><span class="sig-paren">(</span><em>api_key</em>, <em>account=None</em><span class="sig-paren">)</span><a class="headerlink" href="#stockfighter.Stockfighter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class for interfacing with the Stockfighter.io API.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>api_key</strong> &#8211; string containing private key</li>
+<li><strong>account</strong> &#8211; optional account string</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="stockfighter.Stockfighter.cancel_order">
+<code class="descname">cancel_order</code><span class="sig-paren">(</span><em>venue</em>, <em>symbol</em>, <em>order_id</em><span class="sig-paren">)</span><a class="headerlink" href="#stockfighter.Stockfighter.cancel_order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cancels a given order.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>venue</strong> &#8211; str</li>
+<li><strong>symbol</strong> &#8211; str</li>
+<li><strong>order_id</strong> &#8211; int</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">JSON <a class="reference external" href="https://starfighter.readme.io/docs/cancel-an-order">https://starfighter.readme.io/docs/cancel-an-order</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stockfighter.Stockfighter.heartbeat">
+<code class="descname">heartbeat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#stockfighter.Stockfighter.heartbeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pings Stockfighter.io API to verify it is up.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stockfighter.Stockfighter.order">
+<code class="descname">order</code><span class="sig-paren">(</span><em>venue</em>, <em>symbol</em>, <em>side</em>, <em>quantity</em>, <em>ordertype</em>, <em>price=None</em><span class="sig-paren">)</span><a class="headerlink" href="#stockfighter.Stockfighter.order" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an order to the selected venue. Converts the price to an int.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>venue</strong> &#8211; str</li>
+<li><strong>symbol</strong> &#8211; str</li>
+<li><strong>side</strong> &#8211; str</li>
+<li><strong>price</strong> &#8211; float</li>
+<li><strong>quantity</strong> &#8211; int</li>
+<li><strong>ordertype</strong> &#8211; str</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">JSON <a class="reference external" href="https://starfighter.readme.io/docs/place-new-order">https://starfighter.readme.io/docs/place-new-order</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stockfighter.Stockfighter.order_status">
+<code class="descname">order_status</code><span class="sig-paren">(</span><em>venue</em>, <em>symbol</em>, <em>order_id</em><span class="sig-paren">)</span><a class="headerlink" href="#stockfighter.Stockfighter.order_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check on order status.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>venue</strong> &#8211; str</li>
+<li><strong>symbol</strong> &#8211; str</li>
+<li><strong>order_id</strong> &#8211; int</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">JSON <a class="reference external" href="https://starfighter.readme.io/docs/status-for-an-existing-order">https://starfighter.readme.io/docs/status-for-an-existing-order</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stockfighter.Stockfighter.orderbook">
+<code class="descname">orderbook</code><span class="sig-paren">(</span><em>venue</em>, <em>symbol</em><span class="sig-paren">)</span><a class="headerlink" href="#stockfighter.Stockfighter.orderbook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the order book available for a venue and symbol.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>venue</strong> &#8211; str</li>
+<li><strong>symbol</strong> &#8211; str</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">JSON <a class="reference external" href="https://starfighter.readme.io/docs/get-orderbook-for-stock">https://starfighter.readme.io/docs/get-orderbook-for-stock</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stockfighter.Stockfighter.quote">
+<code class="descname">quote</code><span class="sig-paren">(</span><em>venue</em>, <em>symbol</em><span class="sig-paren">)</span><a class="headerlink" href="#stockfighter.Stockfighter.quote" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fetches quote for a symbol, venue.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>venue</strong> &#8211; str</li>
+<li><strong>symbol</strong> &#8211; str</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">JSON <a class="reference external" href="https://starfighter.readme.io/docs/a-quote-for-a-stock">https://starfighter.readme.io/docs/a-quote-for-a-stock</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stockfighter.Stockfighter.stocks">
+<code class="descname">stocks</code><span class="sig-paren">(</span><em>venue</em><span class="sig-paren">)</span><a class="headerlink" href="#stockfighter.Stockfighter.stocks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve the list of stocks available for trading on a venue. Note this
+method only returns the tickers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>venue</strong> &#8211; str</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list(str)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="stockfighter.Stockfighter.venue_heartbeat">
+<code class="descname">venue_heartbeat</code><span class="sig-paren">(</span><em>venue</em><span class="sig-paren">)</span><a class="headerlink" href="#stockfighter.Stockfighter.venue_heartbeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pings a venue to verify it is up.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ordertype.html" class="btn btn-neutral float-right" title="OrderType Enum" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="intro.html" class="btn btn-neutral" title="Stockfighter.io" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Marcin Siwicki.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

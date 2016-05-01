@@ -156,7 +156,7 @@ class Stockfighter(object):
 
     def order_status(self, venue, symbol, order_id):
         """
-        Check on order status.
+        Check an order status.
 
         :param venue: str
         :param symbol: str

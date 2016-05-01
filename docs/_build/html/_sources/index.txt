@@ -6,6 +6,17 @@
 Documentation for Stockfighter Client
 =====================================
 
+Release History
+---------------
+
+v 0.10 (04/30/2016)
+~~~~~~~~~~~~~~~~~~~
+Features:
+
+* Gamemaster API client
+* Stockfighter API client
+* OrderType enum for easier order sending
+
 .. toctree::
    :maxdepth: 2
    :caption: Overview

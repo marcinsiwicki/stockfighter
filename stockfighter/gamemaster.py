@@ -1,5 +1,5 @@
 """
-Wrapper for communicating with gamemaster API.
+Wrapper for communicating with Gamemaster API.
 """
 
 import requests
@@ -21,6 +21,8 @@ class Gamemaster(object):
     def start_level(self, level_name):
         """
         Begin a certain level.
+
+        :type level_name: str
         """
         url = 'levels/{0}'.format(level_name)
         response = self.session.post(self._urljoin(url))
@@ -32,6 +34,8 @@ class Gamemaster(object):
     def restart_level(self, instance_id):
         """
         Pass a known instance id to restart a level.
+
+        :type instance_id: int
         """
         url = 'instances/{0}/restart'.format(instance_id)
         response = self.session.post(self._urljoin(url))
@@ -43,6 +47,8 @@ class Gamemaster(object):
     def stop_level(self, instance_id):
         """
         Stop a level with a given instance id.
+
+        :type instance_id: int
         """
         url = 'instances/{0}/stop'.format(instance_id)
         response = self.session.post(self._urljoin(url))
@@ -54,6 +60,8 @@ class Gamemaster(object):
     def resume_level(self, instance_id):
         """
         Resume a level with a given instance id.
+
+        :type instance_id: int
         """
         url = 'instances/{0}/resume'.format(instance_id)
         response = self.session.post(self._urljoin(url))
@@ -65,6 +73,8 @@ class Gamemaster(object):
     def status(self, instance_id):
         """
         Get status of level.
+
+        :type instance_id: int
         """
         url = 'instances/{0}'.format(instance_id)
         response = self.session.get(self._urljoin(url))

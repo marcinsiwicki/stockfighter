@@ -1,5 +1,6 @@
 """
-Module importing.
+Clients for interacting with Stockfighter and Gamemaster APIs. Also contains utility
+class for order types
 """
 from .stockfighter import Stockfighter
 from .stockfighter import OrderType

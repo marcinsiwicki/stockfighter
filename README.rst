@@ -6,6 +6,14 @@ programming challenges at `Stockfighter.io`_.
 
 Included is a utility enum for easier submission of order types (read: avoid typos).
 
+.. code-block:: python
+
+    from stockfighter import Stockfighter, Gamemaster, OrderType
+    gm = Gamemaster(SECRET_KEY)
+    sf = Stockfighter(SECRET_KEY)
+
+    print sf.heartbeat()
+
 Documentation
 -------------
 
